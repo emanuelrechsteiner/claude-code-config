@@ -39,7 +39,7 @@ Torvaldsen is a **distributable Claude Code workflow package** that provides:
 
 ## Installation
 
-### Quick Install
+### Quick Install (Global)
 
 Copy the workflow files to your Claude Code configuration:
 
@@ -48,28 +48,35 @@ Copy the workflow files to your Claude Code configuration:
 git clone https://github.com/emanuelrechsteiner/Development_Process_inspired_by_Linus_Torvalds.git
 cd Development_Process_inspired_by_Linus_Torvalds
 
-# Copy commands to your Claude Code config
+# Copy commands (globally discoverable as /brainstorm, /issue, etc.)
 cp -r commands/* ~/.claude/commands/
 
-# Copy skills
+# Copy skills (auto-trigger on matching keywords)
 cp -r skills/* ~/.claude/skills/
 
-# Copy rules
-cp -r rules/* ~/.claude/rules/
+# Copy rules + templates to holding directory (NOT auto-loaded globally)
+mkdir -p ~/.claude/torvaldsen/rules ~/.claude/torvaldsen/templates/project-rules
+cp rules/* ~/.claude/torvaldsen/rules/
+cp templates/*.md templates/*.json ~/.claude/torvaldsen/templates/
+cp templates/project-rules/* ~/.claude/torvaldsen/templates/project-rules/
 
 # Merge hooks into your settings.json (manual merge recommended)
 cat hooks/hooks-config.json
-# → Add the hooks to your ~/.claude/settings.json
+# → Add the hooks entries to your ~/.claude/settings.json "hooks" section
 ```
+
+> **Why rules go to `~/.claude/torvaldsen/rules/` instead of `~/.claude/rules/`:**
+> Files in `~/.claude/rules/` are always loaded into every conversation — even non-Torvaldsen projects. Torvaldsen rules (592 lines) should only consume context in Torvaldsen-managed projects. The `/brainstorm` command automatically copies them to each project's `.claude/rules/` during initialization.
 
 ### Per-Project Install
 
-Alternatively, install into a specific project's `.claude/` directory:
+To install into a specific project without global commands:
 
 ```bash
+mkdir -p /path/to/project/.claude/commands /path/to/project/.claude/skills /path/to/project/.claude/rules
 cp -r commands/* /path/to/project/.claude/commands/
 cp -r skills/* /path/to/project/.claude/skills/
-cp -r rules/* /path/to/project/.claude/rules/
+cp rules/* /path/to/project/.claude/rules/
 ```
 
 ---
@@ -278,13 +285,13 @@ Workflwo_Torvaldsen/
 │   │   └── SKILL.md                     #   Auto: onboard, get started
 │   └── scope-check/
 │       └── SKILL.md                     #   Auto: scope check, scope creep
-├── rules/                               # → Copy to .claude/rules/
-│   ├── torvaldsen-workflow.md           #   Core workflow rules
-│   ├── torvaldsen-commits.md            #   Git commit conventions
-│   └── torvaldsen-scope.md              #   Scope discipline rules
+├── rules/                               # → Copy to ~/.claude/torvaldsen/rules/
+│   ├── torvaldsen-workflow.md           #   Core workflow rules (per-project)
+│   ├── torvaldsen-commits.md            #   Git commit conventions (per-project)
+│   └── torvaldsen-scope.md              #   Scope discipline rules (per-project)
 ├── hooks/                               # → Merge into settings.json
 │   └── hooks-config.json               #   Hook definitions
-└── templates/                           # → Referenced by commands
+└── templates/                           # → Copy to ~/.claude/torvaldsen/templates/
     ├── BRAINSTORM.template.md           #   Master plan structure
     ├── RESEARCH-FINDINGS.template.md    #   Tech evaluation
     ├── SPECIFICATION.template.md        #   Features + design + brand
@@ -296,7 +303,13 @@ Workflwo_Torvaldsen/
     ├── ADR.template.md                  #   Architecture Decision Record
     ├── SCOPE-MANIFEST.template.json     #   Feature tracking
     ├── CLAUDE-PROJECT.template.md       #   Project CLAUDE.md
-    └── CONTRIBUTING.template.md         #   Contribution guide
+    ├── CONTRIBUTING.template.md         #   Contribution guide
+    └── project-rules/                   #   Stack-specific rule templates
+        ├── nextjs-app-router.rule.md    #   Next.js App Router patterns
+        ├── supabase.rule.md             #   Supabase/RLS patterns
+        ├── convex.rule.md               #   Convex patterns
+        ├── python-fastapi.rule.md       #   Python/FastAPI patterns
+        └── react-performance.rule.md    #   React scroll/animation patterns
 ```
 
 ---
