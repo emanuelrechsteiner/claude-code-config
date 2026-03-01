@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================================================
-# Claude Code Configuration — Project-Level Install Script
+# Claude Code Configuration (by EKR) — Project-Level Install Script
 # ============================================================================
 #
 # Installs the portable Claude Code framework into a project's .claude/ dir:

@@ -1,6 +1,6 @@
-# Claude Code Development Framework + Torvaldsen Workflow v2.0
+# Claude Code Configuration (by EKR)
 
-> A complete Claude Code configuration with agent orchestration, 10 commands, 22 skills, 7 agents, 7 auto-loaded rules, token optimization, and the Torvaldsen atomic development methodology for AI-assisted projects. Built natively for **Claude Code**.
+> A complete, portable Claude Code configuration with agent orchestration, 10 commands, 22 skills, 7 agents, 7 auto-loaded rules, token optimization, and the Torvaldsen atomic development methodology for AI-assisted projects. Built natively for **Claude Code**.
 
 ## What's In This Repo
 
@@ -22,8 +22,8 @@ This is a **complete, shareable Claude Code configuration** — everything you n
 ### Quick Install
 
 ```bash
-git clone https://github.com/emanuelrechsteiner/Development_Process_inspired_by_Linus_Torvalds.git
-cd Development_Process_inspired_by_Linus_Torvalds
+git clone https://github.com/emanuelrechsteiner/claude-code-config.git
+cd claude-code-config
 
 # Install into your project
 ./install.sh /path/to/your/project              # Full install
@@ -79,8 +79,8 @@ Torvaldsen is a **distributable Claude Code workflow package** that provides:
 The framework installs into your **project's `.claude/` directory** — making it portable, git-shareable, and per-project customizable.
 
 ```bash
-git clone https://github.com/emanuelrechsteiner/Development_Process_inspired_by_Linus_Torvalds.git
-cd Development_Process_inspired_by_Linus_Torvalds
+git clone https://github.com/emanuelrechsteiner/claude-code-config.git
+cd claude-code-config
 ./install.sh /path/to/your/project
 ```
 
@@ -306,7 +306,7 @@ Verifies work matches the plan:
 ## Repository Structure
 
 ```
-claude-code-config/
+claude-code-config/                      # Repository root
 ├── README.md                            # This file
 ├── HOW-TO-USE.md                        # Practical usage guide
 ├── install.sh                           # Project-level installer
@@ -426,5 +426,6 @@ v2.0 adds the infrastructure to maintain quality and continuity across all 219 i
 
 **Version:** 2.0.0
 **Last Updated:** March 2026
+**Author:** EKR (Emanuel K. Rechsteiner)
 **Inspired By:** Linus Torvalds' Linux Kernel Development Model
 **Built For:** Claude Code (Anthropic)
