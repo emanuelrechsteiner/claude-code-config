@@ -4,7 +4,7 @@
 
 ## System Architecture
 
-This environment includes 7 auto-loaded rules (`~/.claude/rules/`), 19 commands, 25 skills (6 forked, 7 background), 7 agents, and 5 hooks. Token optimization is active via `env` settings.
+This environment includes 7 auto-loaded rules (`~/.claude/rules/`), 10 commands, 22 skills (6 forked, 5 background), 7 agents, and 5 hooks. Token optimization is active via `env` settings.
 
 ### Auto-Loaded Rules (always in context)
 
@@ -73,14 +73,14 @@ Torvaldsen rules (commits, scope, workflow) are installed per-project by `/brain
 
 ### Background Skills (auto-trigger only, hidden from menu)
 
-react-perf-check, tailwindcss-v4-styling, import-fixer, fix-review, agent-coordination, orchestration, validation
+react-perf-check, tailwindcss-v4-styling, import-fixer, fix-review, orchestration
 
 ### Token Optimization
 
 Context window efficiency — keep agent outputs small so they don't fill up the main context:
 
 - Extended thinking capped at 10K tokens (`MAX_THINKING_TOKENS`) — prevents runaway reasoning
-- Auto-compact at 50% context usage (`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`) — aggressive context hygiene
+- Auto-compact at 90% context usage (`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`) — compacts before window fills
 
 ### Behavioral Directives
 

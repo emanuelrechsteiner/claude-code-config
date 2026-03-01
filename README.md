@@ -1,6 +1,6 @@
 # Claude Code Development Framework + Torvaldsen Workflow v2.0
 
-> A complete Claude Code configuration with agent orchestration, 19 commands, 25 skills, 7 agents, 7 auto-loaded rules, token optimization, and the Torvaldsen atomic development methodology for AI-assisted projects. Built natively for **Claude Code**.
+> A complete Claude Code configuration with agent orchestration, 10 commands, 22 skills, 7 agents, 7 auto-loaded rules, token optimization, and the Torvaldsen atomic development methodology for AI-assisted projects. Built natively for **Claude Code**.
 
 ## What's In This Repo
 
@@ -11,9 +11,9 @@ This is a **complete, shareable Claude Code configuration** — everything you n
 | **Global Rules** | 7 | Always-loaded rules: code quality, testing, security, git, docs |
 | **Agents** | 7 | Implementation specialists (backend, testing, review, planning, design: UX + UI, cleanup) |
 | **Forked Skills** | 6 | Run in isolated context like agents: build validation, research, git ops, debugging, patterns, docs |
-| **Background Skills** | 7 | Auto-trigger only (hidden from menu): perf check, Tailwind, imports, etc. |
-| **Standard Skills** | 12 | User-invocable: scope check, onboarding, testing, planning, etc. |
-| **Commands** | 19 | Slash commands: `/brainstorm`, `/issue`, `/review`, `/deploy`, etc. |
+| **Background Skills** | 5 | Auto-trigger only (hidden from menu): perf check, Tailwind, imports, etc. |
+| **Standard Skills** | 11 | User-invocable: scope check, onboarding, testing, planning, etc. |
+| **Commands** | 10 | Slash commands: `/brainstorm`, `/issue`, `/review`, `/bootstrap`, etc. |
 | **Hook Scripts** | 5 | File protection, auto-format, git safety, security guard |
 | **Token Optimization** | 2 | env settings: thinking cap, auto-compact |
 | **Torvaldsen Workflow** | 8 commands | Atomic development methodology for 200+ issue projects |
@@ -329,35 +329,24 @@ claude-code-config/
 │   │   # framework-specialist → nextjs-debug skill (context: fork, model: haiku)
 │   │   # pattern-extractor → pattern-document skill (context: fork, model: sonnet)
 │   │   # documentation → documentation skill (context: fork, model: sonnet)
-│   ├── commands/                        #   19 slash commands
-│   │   ├── bootstrap.md                 #     /bootstrap — repo setup
+│   ├── commands/                        #   10 slash commands
+│   │   ├── bootstrap.md                 #     /bootstrap — repo explore + setup
 │   │   ├── brainstorm.md                #     /brainstorm — idea → foundation
 │   │   ├── decompose.md                 #     /decompose → GitHub issues
-│   │   ├── develop.md                   #     /develop — orchestrated workflow
-│   │   ├── documentation.md             #     /documentation — generate docs
 │   │   ├── handoff.md                   #     /handoff — agent context transfer
-│   │   ├── implement.md                 #     /implement — implementation phase
 │   │   ├── issue.md                     #     /issue <#> — 9-phase dev loop
-│   │   ├── ledger.md                    #     /ledger — observation health
 │   │   ├── lessons.md                   #     /lessons — pattern extraction
 │   │   ├── meta.md                      #     /meta — system verification
-│   │   ├── onboard.md                   #     /onboard — codebase deep dive
 │   │   ├── phase-gate.md                #     /phase-gate <N> — quality gate
-│   │   ├── plan.md                      #     /plan — development planning
-│   │   ├── research.md                  #     /research — technology research
 │   │   ├── review.md                    #     /review <PR#> — 10-phase review
-│   │   ├── start.md                     #     /start — codebase exploration
-│   │   ├── status-sync.md               #     /status-sync — dashboard update
-│   │   └── test.md                      #     /test — run/write tests
-│   ├── skills/                          #   25 auto-triggered skills
-│   │   ├── agent-coordination/          #     Multi-agent coordination
+│   │   └── status-sync.md               #     /status-sync — dashboard update
+│   ├── skills/                          #   22 auto-triggered skills
 │   │   ├── backend-development/         #     Firebase, state management
 │   │   ├── dependency-audit/            #     npm audit, outdated pkgs
 │   │   ├── documentation/               #     Technical docs
 │   │   ├── fix-review/                  #     Post-fix completeness
 │   │   ├── human-testing/               #     UX/UI manual testing
 │   │   ├── import-fixer/                #     Broken import repair
-│   │   ├── improvement-analysis/        #     Workflow optimization
 │   │   ├── nextjs-debug/                #     Next.js diagnostics
 │   │   ├── orchestration/               #     Agent scrum master
 │   │   ├── pattern-document/            #     Learning extraction
@@ -373,7 +362,6 @@ claude-code-config/
 │   │   ├── ui-development/              #     React components
 │   │   ├── ux-design/                   #     UX workflows
 │   │   ├── validate-build/              #     Build validation
-│   │   ├── validation/                  #     Pre-execution checks
 │   │   └── version-control/             #     Git operations
 │   └── hooks/                           #   5 hook scripts
 │       ├── auto-format.sh               #     Post-edit formatting
