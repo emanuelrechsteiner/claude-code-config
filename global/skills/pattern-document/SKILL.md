@@ -1,6 +1,8 @@
 ---
 name: pattern-document
 description: Learning extraction skill. Analyzes recent fixes, extracts reusable patterns or anti-patterns, and creates rule documents in ~/.claude/rules/. Use after discovering bugs or implementing solutions that could help prevent future issues. Triggers on "document pattern", "extract learning", "create rule", "prevent this bug", "pattern document", "save this pattern".
+context: fork
+model: sonnet
 allowed-tools: Read, Write, Glob, Grep, Bash(git log *), Bash(git diff *)
 ---
 

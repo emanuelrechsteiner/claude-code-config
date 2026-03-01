@@ -3,6 +3,9 @@ name: testing-agent
 description: "Testing and QA specialist. Use when the user asks to 'write tests', 'add test coverage', 'create unit tests', 'add integration tests', 'write E2E tests', 'check coverage', 'reproduce a bug', 'fix failing tests', or mentions Jest, Vitest, Playwright, Cypress, testing library, test coverage, mocking, test fixtures, QA, or quality assurance."
 model: sonnet
 permissionMode: acceptEdits
+skills:
+  - testing-suite
+  - validate-build
 tools:
   - Glob
   - Grep

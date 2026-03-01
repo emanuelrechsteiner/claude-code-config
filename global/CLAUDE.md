@@ -1,10 +1,10 @@
 # Claude Code — Development Framework
 
-> You orchestrate, agents execute. Use specialized agents for their designated tasks rather than doing the work directly.
+> You orchestrate, agents execute. Use specialized agents for heavy implementation and forked skills for diagnostics/utilities.
 
 ## System Architecture
 
-This environment includes 7 auto-loaded rules (`~/.claude/rules/`), 19 commands, 26+ skills, 21 agents, and 5 hooks. All rules are loaded automatically — no imports needed.
+This environment includes 7 auto-loaded rules (`~/.claude/rules/`), 19 commands, 26 skills (6 forked, 8 background), 14 agents, and 5 hooks. Token optimization is active via `env` settings.
 
 ### Auto-Loaded Rules (always in context)
 
@@ -18,23 +18,29 @@ This environment includes 7 auto-loaded rules (`~/.claude/rules/`), 19 commands,
 | documentation | Active/archived docs, JSDoc, README |
 | mcp-tool-usage | MCP path conventions, parameter formats |
 
-### Agent Selection (use Task tool)
+### Agent Selection (use Task tool — for heavy implementation work)
 
-| Agent | Use For |
-|-------|---------|
-| research-agent | Technology research, API docs, best practices |
-| planning-agent | Architecture, task breakdown, implementation plans |
-| ux-agent | User flows, wireframes, accessibility |
-| ui-agent | Visual design systems, component specs |
-| backend-agent | APIs, database, server logic, authentication |
-| frontend-agent | UI components, state management, styling |
-| testing-agent | Unit tests, integration tests, E2E tests |
-| documentation-agent | API docs, README, developer guides |
-| build-validator-agent | TypeScript/ESLint quick validation |
-| cleanup-agent | Dead code detection, debug artifact removal |
-| version-control-agent | Git operations, commits, PRs |
-| framework-specialist-agent | Next.js debugging, SSR/hydration issues |
-| pattern-extractor-agent | Learning extraction from bug fixes |
+| Agent | Model | Use For |
+|-------|-------|---------|
+| planning-agent | sonnet | Architecture, task breakdown, implementation plans |
+| backend-agent | sonnet | APIs, database, server logic, authentication |
+| frontend-agent | sonnet | UI components, state management, styling |
+| testing-agent | sonnet | Unit tests, integration tests, E2E tests |
+| code-reviewer-agent | sonnet | Code review (READ-ONLY — cannot edit files) |
+| cleanup-agent | haiku | Dead code detection, debug artifact removal |
+| ux-agent | sonnet | User flows, wireframes, accessibility |
+| ui-agent | sonnet | Visual design systems, component specs |
+
+### Forked Skills (replace former agents — run in isolated context)
+
+| Skill | Model | Replaces |
+|-------|-------|----------|
+| validate-build | haiku | build-validator-agent |
+| research | haiku | research-agent |
+| version-control | haiku | version-control-agent |
+| nextjs-debug | haiku | framework-specialist-agent |
+| pattern-document | sonnet | pattern-extractor-agent |
+| documentation | sonnet | documentation-agent |
 
 ### Torvaldsen Workflow (for managed projects)
 
@@ -55,16 +61,27 @@ Torvaldsen rules (commits, scope, workflow) are installed per-project by `/brain
 
 ### Key Skills (auto-triggered)
 
-| Skill | Triggers On |
-|-------|-------------|
-| validate-build | "validate", "check build", "type check" |
-| fix-review | "review fix", "check fix", "did I miss anything" |
-| scope-check | "scope check", "scope creep", "verify scope" |
-| torvaldsen-onboard | "onboard", "get started", "what should I work on" |
-| react-perf-check | "react performance", "slow render" |
-| nextjs-debug | "nextjs debug", "404 error", "hydration" |
-| tailwindcss-v4-styling | "TailwindCSS", "styling broken" |
-| pattern-document | "document pattern", "create rule" |
+| Skill | Triggers On | Mode |
+|-------|-------------|------|
+| validate-build | "validate", "check build", "type check" | forked |
+| research | "research", "best practices", "API docs" | forked |
+| version-control | "git", "commit", "branch", "PR" | forked |
+| nextjs-debug | "nextjs debug", "404 error", "hydration" | forked |
+| pattern-document | "document pattern", "create rule" | forked |
+| documentation | "document", "README", "API docs" | forked |
+| scope-check | "scope check", "scope creep", "verify scope" | main |
+| torvaldsen-onboard | "onboard", "get started", "what should I work on" | main |
+
+### Background Skills (auto-trigger only, hidden from menu)
+
+react-perf-check, tailwindcss-v4-styling, import-fixer, fix-review, agent-coordination, orchestration, validation, consistency-check
+
+### Token Optimization
+
+- Sub-agents default to haiku (`CLAUDE_CODE_SUBAGENT_MODEL`)
+- Extended thinking capped at 10K tokens (`MAX_THINKING_TOKENS`)
+- Auto-compact at 50% context usage (`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`)
+- Override per-agent/skill with explicit `model:` field
 
 ### Behavioral Directives
 

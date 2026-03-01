@@ -1,6 +1,8 @@
 ---
 name: research
 description: Documentation research specialist using web fetching and search. Researches technologies, APIs, best practices, and gathers implementation guides. Use when learning about new technologies, finding documentation, researching solutions, or gathering best practices. Triggers on "research", "documentation", "learn about", "how to", "best practices", "API docs", "Firebase docs", "React docs", "find documentation", "investigate".
+context: fork
+model: haiku
 allowed-tools: WebFetch, WebSearch, Read, Grep, Glob
 ---
 

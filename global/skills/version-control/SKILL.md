@@ -1,6 +1,8 @@
 ---
 name: version-control
 description: Git operations and release management specialist. Handles branching strategies, conventional commits, PR management, release coordination, and clean Git history. Use when managing git operations, creating commits, handling branches, preparing releases, or managing PRs. Triggers on "git", "commit", "branch", "merge", "release", "PR", "pull request", "version", "tag", "push".
+context: fork
+model: haiku
 allowed-tools: Bash(git:*), Bash(gh:*), Read, Grep
 ---
 

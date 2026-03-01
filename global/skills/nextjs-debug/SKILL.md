@@ -1,6 +1,8 @@
 ---
 name: nextjs-debug
 description: Framework diagnostics for Next.js applications. Troubleshoots API route 404/405 errors, middleware redirect loops, SSR/hydration issues, and server/client component problems. Use when facing Next.js-specific issues. Triggers on "nextjs debug", "404 error", "405 error", "middleware issue", "hydration error", "server component", "client component", "API route not working".
+context: fork
+model: haiku
 allowed-tools: Read, Glob, Grep, Bash(npm *), Bash(npx next *)
 ---
 

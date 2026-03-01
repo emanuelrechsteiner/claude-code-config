@@ -3,6 +3,10 @@ name: frontend-agent
 description: "Frontend development specialist. Use when the user asks to 'build a component', 'create UI', 'implement the design', 'add styling', 'fix the layout', 'add state management', or mentions React, Vue, Svelte, TypeScript components, Tailwind CSS, CSS modules, Zustand, Redux, hooks, responsive design, accessibility, WCAG, dark mode, or client-side logic."
 model: sonnet
 permissionMode: acceptEdits
+skills:
+  - ui-development
+  - react-perf-check
+  - tailwindcss-v4-styling
 tools:
   - Glob
   - Grep

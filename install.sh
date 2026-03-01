@@ -7,8 +7,9 @@
 #   - CLAUDE.md (global instructions)
 #   - 7 auto-loaded rules (always in context)
 #   - 19 commands (slash commands)
-#   - 26 skills (auto-triggered)
-#   - 5 hook scripts + settings.json
+#   - 26 skills (6 forked, 8 background, 12 standard)
+#   - 14 agents (implementation specialists)
+#   - 5 hook scripts + settings.json (with token optimization)
 #   - Torvaldsen workflow (optional, for managed projects)
 #
 # Usage:
@@ -128,8 +129,8 @@ if [ "$INSTALL_GLOBAL" = true ]; then
     safe_copy "$f" "$CLAUDE_DIR/rules/$(basename "$f")"
   done
 
-  # Agents
-  info "Agents (20 sub-agent definitions)"
+  # Agents (active only — archived agents are not installed)
+  info "Agents (14 active sub-agent definitions)"
   mkdir -p "$CLAUDE_DIR/agents"
   for f in "$SCRIPT_DIR/global/agents/"*.md; do
     safe_copy "$f" "$CLAUDE_DIR/agents/$(basename "$f")"
@@ -225,11 +226,11 @@ if [ "$INSTALL_GLOBAL" = true ]; then
   echo "  Global Config:"
   echo "    CLAUDE.md          → ~/.claude/CLAUDE.md"
   echo "    7 rules            → ~/.claude/rules/"
-  echo "    20 agents          → ~/.claude/agents/"
+  echo "    14 agents          → ~/.claude/agents/"
   echo "    19 commands        → ~/.claude/commands/"
-  echo "    26 skills          → ~/.claude/skills/"
+  echo "    26 skills          → ~/.claude/skills/ (6 forked, 8 background)"
   echo "    5 hook scripts     → ~/.claude/hooks/"
-  echo "    settings.json      → ~/.claude/settings.json"
+  echo "    settings.json      → ~/.claude/settings.json (with token optimization)"
   echo ""
 fi
 

@@ -1,6 +1,7 @@
 ---
 name: react-perf-check
 description: Performance anti-pattern detection for React components. Detects state/ref conflicts, unnecessary re-renders, missing memoization, and animation performance issues. Use when experiencing UI lag, jank, or unexpected behavior. Triggers on "react performance", "slow render", "re-render", "laggy", "jank", "animation slow", "state ref conflict", "useEffect performance".
+user-invocable: false
 allowed-tools: Read, Glob, Grep
 ---
 

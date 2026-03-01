@@ -3,6 +3,9 @@ name: backend-agent
 description: "Backend development specialist. Use when the user asks to 'build an API', 'create endpoints', 'set up database', 'implement authentication', 'add server logic', 'create cloud functions', 'write backend code', or mentions Firebase, Firestore, Express, Node.js server, REST API, GraphQL, JWT, OAuth, database schema, migrations, or server-side validation."
 model: sonnet
 permissionMode: acceptEdits
+skills:
+  - backend-development
+  - validate-build
 tools:
   - Glob
   - Grep

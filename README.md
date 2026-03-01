@@ -1,6 +1,6 @@
 # Claude Code Development Framework + Torvaldsen Workflow v2.0
 
-> A complete Claude Code configuration with agent orchestration, 19 commands, 26 skills, 7 auto-loaded rules, and the Torvaldsen atomic development methodology for AI-assisted projects. Built natively for **Claude Code**.
+> A complete Claude Code configuration with agent orchestration, 19 commands, 26 skills, 14 agents, 7 auto-loaded rules, token optimization, and the Torvaldsen atomic development methodology for AI-assisted projects. Built natively for **Claude Code**.
 
 ## What's In This Repo
 
@@ -9,10 +9,13 @@ This is a **complete, shareable Claude Code configuration** — everything you n
 | Category | Count | Description |
 |----------|-------|-------------|
 | **Global Rules** | 7 | Always-loaded rules: code quality, testing, security, git, docs |
-| **Agents** | 20 | Sub-agent definitions for Task tool orchestration |
+| **Agents** | 14 | Implementation specialists (backend, frontend, testing, review, planning, design, cleanup + 6 literary) |
+| **Forked Skills** | 6 | Run in isolated context like agents: build validation, research, git ops, debugging, patterns, docs |
+| **Background Skills** | 8 | Auto-trigger only (hidden from menu): perf check, Tailwind, imports, etc. |
+| **Standard Skills** | 12 | User-invocable: scope check, onboarding, testing, planning, etc. |
 | **Commands** | 19 | Slash commands: `/brainstorm`, `/issue`, `/review`, `/deploy`, etc. |
-| **Skills** | 26 | Auto-triggered: build validation, scope checking, debugging, etc. |
 | **Hook Scripts** | 5 | File protection, auto-format, git safety, security guard |
+| **Token Optimization** | 3 | env settings: haiku default for sub-agents, thinking cap, auto-compact |
 | **Torvaldsen Workflow** | 8 commands | Atomic development methodology for 200+ issue projects |
 | **Templates** | 17 | Artifact blueprints + 5 stack-specific rule templates |
 
@@ -311,27 +314,28 @@ claude-code-config/
 │   │   ├── workflow-git.md              #     Branches, commits, PRs
 │   │   ├── documentation.md             #     Active/archived docs, JSDoc
 │   │   └── mcp-tool-usage.md            #     MCP path conventions
-│   ├── agents/                          #   20 sub-agent definitions (Task tool)
-│   │   ├── backend-agent.md             #     API, database, server logic
-│   │   ├── frontend-agent.md            #     UI components, state, styling
-│   │   ├── testing-agent.md             #     Unit/integration/E2E tests
-│   │   ├── documentation-agent.md       #     API docs, README, guides
-│   │   ├── planning-agent.md            #     Architecture, task breakdown
-│   │   ├── research-agent.md            #     Tech research (uses haiku)
+│   ├── agents/                          #   14 active sub-agent definitions (Task tool)
+│   │   ├── backend-agent.md             #     API, database, server logic (skills: backend-dev, validate-build)
+│   │   ├── frontend-agent.md            #     UI components, state, styling (skills: ui-dev, react-perf, tailwind)
+│   │   ├── testing-agent.md             #     Unit/integration/E2E tests (skills: testing-suite, validate-build)
+│   │   ├── planning-agent.md            #     Architecture, task breakdown (model: sonnet)
 │   │   ├── ui-agent.md                  #     Visual design, component specs
 │   │   ├── ux-agent.md                  #     User flows, wireframes
-│   │   ├── version-control-agent.md     #     Git operations, PRs
-│   │   ├── build-validator-agent.md     #     TypeScript/ESLint checks
-│   │   ├── cleanup-agent.md             #     Dead code, debug artifacts
-│   │   ├── code-reviewer-agent.md       #     Read-only code review
-│   │   ├── framework-specialist-agent.md #    Next.js/SSR debugging
-│   │   ├── pattern-extractor-agent.md   #     Learning from bug fixes
+│   │   ├── cleanup-agent.md             #     Dead code, debug artifacts (model: haiku)
+│   │   ├── code-reviewer-agent.md       #     Read-only code review (hooks: blocks Write/Edit)
 │   │   ├── consistency-orchestrator-agent.md # Manuscript consistency
 │   │   ├── naming-consistency-agent.md  #     Name/term consistency
 │   │   ├── timeline-consistency-agent.md #    Timeline/date consistency
 │   │   ├── detail-consistency-agent.md  #     Object/action detail checks
 │   │   ├── plausibility-agent.md        #     Story logic plausibility
 │   │   └── story-loopholes-agent.md     #     Plot holes, loose threads
+│   │   # 6 agents archived → replaced by forked skills:
+│   │   # build-validator → validate-build skill (context: fork, model: haiku)
+│   │   # research → research skill (context: fork, model: haiku)
+│   │   # version-control → version-control skill (context: fork, model: haiku)
+│   │   # framework-specialist → nextjs-debug skill (context: fork, model: haiku)
+│   │   # pattern-extractor → pattern-document skill (context: fork, model: sonnet)
+│   │   # documentation → documentation skill (context: fork, model: sonnet)
 │   ├── commands/                        #   19 slash commands
 │   │   ├── bootstrap.md                 #     /bootstrap — repo setup
 │   │   ├── brainstorm.md                #     /brainstorm — idea → foundation

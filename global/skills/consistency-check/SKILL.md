@@ -1,6 +1,7 @@
 ---
 name: consistency-check
 description: "Comprehensive manuscript consistency checker. Analyzes novels for naming inconsistencies, timeline errors, plot holes, plausibility issues, and detail contradictions (like 'laser drill vs. sharp stone'). Use for manuscripts, novels, screenplays. Triggers on: 'consistency check', 'check consistency', 'find inconsistencies', 'plot holes', 'continuity errors', 'manuscript review'."
+user-invocable: false
 allowed-tools: Read, Glob, Grep, Task
 ---
 

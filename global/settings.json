@@ -96,7 +96,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '🚀 Claude Code session started - $(date)'"
+            "command": "echo '\ud83d\ude80 Claude Code session started - $(date)'"
           }
         ]
       }
@@ -124,7 +124,7 @@
           },
           {
             "type": "command",
-            "command": "echo '📝 File modification detected - remember to commit within 60 minutes'"
+            "command": "echo '\ud83d\udcdd File modification detected - remember to commit within 60 minutes'"
           },
           {
             "type": "command",
@@ -173,7 +173,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '✅ Sub-agent completed task'"
+            "command": "echo '\u2705 Sub-agent completed task'"
           }
         ]
       }
@@ -230,5 +230,10 @@
     "ledger-path": "~/.claude/global-observation/",
     "token-tracking": true
   },
-  "model": "sonnet"
+  "model": "sonnet",
+  "env": {
+    "CLAUDE_CODE_SUBAGENT_MODEL": "haiku",
+    "MAX_THINKING_TOKENS": "10000",
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "50"
+  }
 }
