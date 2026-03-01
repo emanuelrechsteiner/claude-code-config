@@ -4,7 +4,7 @@
 
 ## System Architecture
 
-This environment includes 7 auto-loaded rules (`~/.claude/rules/`), 10 commands, 22 skills (6 forked, 5 background), 7 agents, and 5 hooks. Token optimization is active via `env` settings.
+This environment includes 7 auto-loaded rules (`.claude/rules/`), 10 commands, 22 skills (6 forked, 5 background), 7 agents, and 5 hooks. Token optimization is active via `env` settings.
 
 ### Auto-Loaded Rules (always in context)
 

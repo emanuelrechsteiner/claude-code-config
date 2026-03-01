@@ -10,6 +10,8 @@ allowed-tools:
   - Grep
   - Bash(git:*)
   - Bash(mkdir:*)
+  - Bash(cp:*)
+  - Bash(ls:*)
 ---
 
 # Torvaldsen Brainstorm — Full Product Development Pipeline
@@ -33,6 +35,19 @@ You are executing the Torvaldsen `/brainstorm` command. This transforms a rough 
    └── phase-summaries/
    ```
 3. Read templates from the Torvaldsen workflow package for structure reference
+4. **Install Torvaldsen rules** into the project's `.claude/rules/` directory:
+   ```bash
+   mkdir -p .claude/rules
+   cp .claude/torvaldsen/rules/torvaldsen-workflow.md .claude/rules/
+   cp .claude/torvaldsen/rules/torvaldsen-commits.md .claude/rules/
+   cp .claude/torvaldsen/rules/torvaldsen-scope.md .claude/rules/
+   ```
+5. After architecture decisions in Phase 3, copy applicable **stack-specific rules** from `.claude/torvaldsen/templates/project-rules/`:
+   - If using Next.js App Router → copy `nextjs-app-router.rule.md`
+   - If using Supabase → copy `supabase.rule.md`
+   - If using Convex → copy `convex.rule.md`
+   - If using Python/FastAPI → copy `python-fastapi.rule.md`
+   - If using React with animations → copy `react-performance.rule.md`
 
 ---
 

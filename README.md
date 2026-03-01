@@ -22,11 +22,17 @@ This is a **complete, shareable Claude Code configuration** — everything you n
 ### Quick Install
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-cd YOUR_REPO
-./install.sh            # Full install
-./install.sh --global   # Only global config (no Torvaldsen)
-./install.sh --dry-run  # Preview what would be installed
+git clone https://github.com/emanuelrechsteiner/Development_Process_inspired_by_Linus_Torvalds.git
+cd Development_Process_inspired_by_Linus_Torvalds
+
+# Install into your project
+./install.sh /path/to/your/project              # Full install
+./install.sh /path/to/your/project --minimal    # Skip Torvaldsen overlay
+./install.sh --dry-run /path/to/your/project    # Preview only
+
+# Then commit the .claude/ directory in your project
+cd /path/to/your/project
+git add .claude/ && git commit -m "chore: add Claude Code framework"
 ```
 
 ---
@@ -68,45 +74,47 @@ Torvaldsen is a **distributable Claude Code workflow package** that provides:
 
 ## Installation
 
-### Automated Install (Recommended)
+### Project-Level Install (Recommended)
+
+The framework installs into your **project's `.claude/` directory** — making it portable, git-shareable, and per-project customizable.
 
 ```bash
 git clone https://github.com/emanuelrechsteiner/Development_Process_inspired_by_Linus_Torvalds.git
 cd Development_Process_inspired_by_Linus_Torvalds
-./install.sh
+./install.sh /path/to/your/project
 ```
 
 The install script:
-- Backs up your existing `~/.claude/` configuration
-- Copies global config (CLAUDE.md, rules, commands, skills, hooks)
-- Copies Torvaldsen workflow (rules, templates — NOT auto-loaded)
-- Won't overwrite `settings.json` if it exists (manual merge recommended)
+- Backs up any existing `.claude/` directory in your project
+- Copies the full framework (CLAUDE.md, rules, commands, skills, hooks, settings)
+- Includes Torvaldsen workflow overlay (templates, rules)
+- Verifies installation (no stale paths, hooks executable)
+- Prints next steps
 
 **Options:**
-- `./install.sh --global` — Only global config, skip Torvaldsen
-- `./install.sh --torvaldsen` — Only Torvaldsen workflow
-- `./install.sh --dry-run` — Preview without changes
+- `./install.sh /path/to/project --minimal` — Skip Torvaldsen overlay
+- `./install.sh --dry-run /path/to/project` — Preview without changes
+- `./install.sh --strip-global` — Remove old framework from `~/.claude/`
 
 ### Manual Install
 
 ```bash
-# Global config
-cp global/CLAUDE.md ~/.claude/
-cp global/rules/*.md ~/.claude/rules/
-cp global/commands/*.md ~/.claude/commands/
-cp -r global/skills/* ~/.claude/skills/
-cp global/hooks/*.sh ~/.claude/hooks/
-# Merge global/settings.json into your existing ~/.claude/settings.json
-
-# Torvaldsen (optional)
-mkdir -p ~/.claude/torvaldsen/rules ~/.claude/torvaldsen/templates/project-rules
-cp torvaldsen/rules/*.md ~/.claude/torvaldsen/rules/
-cp torvaldsen/templates/*.md torvaldsen/templates/*.json ~/.claude/torvaldsen/templates/
-cp torvaldsen/templates/project-rules/*.md ~/.claude/torvaldsen/templates/project-rules/
+# Copy the portable package into your project
+cp -r portable/ /path/to/your/project/.claude/
+chmod +x /path/to/your/project/.claude/hooks/*.sh
 ```
 
-> **Why Torvaldsen rules go to `~/.claude/torvaldsen/rules/` NOT `~/.claude/rules/`:**
-> Files in `~/.claude/rules/` are always loaded into every conversation — even non-Torvaldsen projects. Torvaldsen rules (592 lines) should only consume context when needed. The `/brainstorm` command copies them to each project's `.claude/rules/` during initialization.
+### Global Cleanup (after migrating to project-level)
+
+If you previously installed globally to `~/.claude/`, strip it to minimum:
+
+```bash
+./install.sh --strip-global
+```
+
+This removes rules, commands, agents, skills, hooks, and CLAUDE.md from `~/.claude/`, leaving only `settings.json` (plugins, sandbox) and `settings.local.json` (secrets).
+
+> **Why project-level?** Previously, the framework installed to `~/.claude/` (global). This meant every project shared the same config, collaborators couldn't inherit the framework, and there was no per-project customization. Now each project carries its own `.claude/` directory — clone the repo and the framework comes with it.
 
 ---
 
@@ -300,13 +308,14 @@ Verifies work matches the plan:
 ```
 claude-code-config/
 ├── README.md                            # This file
-├── install.sh                           # Automated installer
+├── HOW-TO-USE.md                        # Practical usage guide
+├── install.sh                           # Project-level installer
 │
-├── global/                              # ═══ GLOBAL CONFIG (→ ~/.claude/) ═══
-│   ├── CLAUDE.md                        #   Global instructions (75 lines)
-│   ├── settings.json                    #   Permissions, hooks, plugins
-│   ├── statusline-command.sh            #   Status line script
-│   ├── rules/                           #   Auto-loaded every session (544 lines)
+├── portable/                            # ═══ DROP-IN PACKAGE (→ <project>/.claude/) ═══
+│   ├── CLAUDE.md                        #   Framework orchestration (auto-loaded)
+│   ├── settings.local.json              #   Hooks, permissions, env vars (git-safe)
+│   ├── .gitignore                       #   Excludes runtime artifacts
+│   ├── rules/                           #   7 auto-loaded rules
 │   │   ├── foundation.md                #     Agent orchestration, dev phases
 │   │   ├── code-quality.md              #     TypeScript/Python standards
 │   │   ├── testing-quality.md           #     Testing cadence, coverage targets
@@ -314,21 +323,14 @@ claude-code-config/
 │   │   ├── workflow-git.md              #     Branches, commits, PRs
 │   │   ├── documentation.md             #     Active/archived docs, JSDoc
 │   │   └── mcp-tool-usage.md            #     MCP path conventions
-│   ├── agents/                          #   7 active sub-agent definitions (Task tool)
-│   │   ├── backend-agent.md             #     API, database, server logic (skills: backend-dev, validate-build)
-│   │   ├── testing-agent.md             #     Unit/integration/E2E tests (skills: testing-suite, validate-build)
+│   ├── agents/                          #   7 active sub-agent definitions
+│   │   ├── backend-agent.md             #     API, database, server logic
+│   │   ├── testing-agent.md             #     Unit/integration/E2E tests
 │   │   ├── planning-agent.md            #     Architecture, task breakdown (model: opus)
-│   │   ├── ui-agent.md                  #     Visual design, component specs + implementation (UX → UI pipeline)
-│   │   ├── ux-agent.md                  #     User flows, wireframes (UX → UI pipeline)
-│   │   ├── cleanup-agent.md             #     Dead code, debug artifacts (model: haiku)
-│   │   └── code-reviewer-agent.md       #     Read-only code review (hooks: blocks Write/Edit)
-│   │   # 6 agents archived → replaced by forked skills:
-│   │   # build-validator → validate-build skill (context: fork, model: haiku)
-│   │   # research → research skill (context: fork, model: haiku)
-│   │   # version-control → version-control skill (context: fork, model: haiku)
-│   │   # framework-specialist → nextjs-debug skill (context: fork, model: haiku)
-│   │   # pattern-extractor → pattern-document skill (context: fork, model: sonnet)
-│   │   # documentation → documentation skill (context: fork, model: sonnet)
+│   │   ├── ui-agent.md                  #     Visual design, component implementation
+│   │   ├── ux-agent.md                  #     User flows, wireframes
+│   │   ├── cleanup-agent.md             #     Dead code detection (model: haiku)
+│   │   └── code-reviewer-agent.md       #     Read-only code review
 │   ├── commands/                        #   10 slash commands
 │   │   ├── bootstrap.md                 #     /bootstrap — repo explore + setup
 │   │   ├── brainstorm.md                #     /brainstorm — idea → foundation
@@ -341,64 +343,49 @@ claude-code-config/
 │   │   ├── review.md                    #     /review <PR#> — 10-phase review
 │   │   └── status-sync.md               #     /status-sync — dashboard update
 │   ├── skills/                          #   22 auto-triggered skills
-│   │   ├── backend-development/         #     Firebase, state management
-│   │   ├── dependency-audit/            #     npm audit, outdated pkgs
-│   │   ├── documentation/               #     Technical docs
-│   │   ├── fix-review/                  #     Post-fix completeness
-│   │   ├── human-testing/               #     UX/UI manual testing
-│   │   ├── import-fixer/                #     Broken import repair
-│   │   ├── nextjs-debug/                #     Next.js diagnostics
-│   │   ├── orchestration/               #     Agent scrum master
-│   │   ├── pattern-document/            #     Learning extraction
-│   │   ├── project-bootstrap/           #     Repo exploration
-│   │   ├── project-planning/            #     Strategic planning
-│   │   ├── react-perf-check/            #     React performance
-│   │   ├── research/                    #     Tech research
-│   │   ├── scope-check/                 #     Scope enforcement
-│   │   ├── tailwindcss-v4-styling/      #     Tailwind v4 patterns
-│   │   ├── testing-suite/               #     QA specialist
-│   │   ├── torvaldsen-onboard/          #     Agent onboarding
-│   │   ├── type-coverage/               #     TypeScript coverage
-│   │   ├── ui-development/              #     React components
-│   │   ├── ux-design/                   #     UX workflows
-│   │   ├── validate-build/              #     Build validation
-│   │   └── version-control/             #     Git operations
-│   └── hooks/                           #   5 hook scripts
-│       ├── auto-format.sh               #     Post-edit formatting
-│       ├── file-protection.sh           #     Sensitive file guard
-│       ├── git-state-check.sh           #     Git safety checks
-│       ├── guard-unsafe.sh              #     Dangerous command blocker
-│       └── post-edit-validate.sh        #     Post-edit validation
+│   │   ├── backend-development/
+│   │   ├── dependency-audit/
+│   │   ├── documentation/
+│   │   ├── fix-review/
+│   │   ├── human-testing/
+│   │   ├── import-fixer/
+│   │   ├── nextjs-debug/
+│   │   ├── orchestration/
+│   │   ├── pattern-document/
+│   │   ├── project-bootstrap/
+│   │   ├── project-planning/
+│   │   ├── react-perf-check/
+│   │   ├── research/
+│   │   ├── scope-check/
+│   │   ├── tailwindcss-v4-styling/
+│   │   ├── testing-suite/
+│   │   ├── torvaldsen-onboard/
+│   │   ├── type-coverage/
+│   │   ├── ui-development/
+│   │   ├── ux-design/
+│   │   ├── validate-build/
+│   │   └── version-control/
+│   ├── hooks/                           #   5 hook scripts + statusline
+│   │   ├── guard-unsafe.sh
+│   │   ├── git-state-check.sh
+│   │   ├── file-protection.sh
+│   │   ├── auto-format.sh
+│   │   ├── post-edit-validate.sh
+│   │   └── statusline-command.sh
+│   └── torvaldsen/                      #   Optional workflow overlay
+│       ├── rules/                       #     3 rules (NOT auto-loaded)
+│       │   ├── torvaldsen-workflow.md
+│       │   ├── torvaldsen-commits.md
+│       │   └── torvaldsen-scope.md
+│       └── templates/                   #     12 artifact blueprints
+│           ├── BRAINSTORM.template.md
+│           ├── ARCHITECTURE.template.md
+│           ├── (10 more templates...)
+│           └── project-rules/           #     5 stack-specific templates
 │
-├── torvaldsen/                          # ═══ TORVALDSEN WORKFLOW (optional) ═══
-│   ├── commands/                        #   8 Torvaldsen commands (also in global/)
-│   ├── skills/                          #   2 Torvaldsen skills (also in global/)
-│   ├── rules/                           #   Per-project rules (NOT auto-loaded)
-│   │   ├── torvaldsen-workflow.md       #     Core workflow (164 lines)
-│   │   ├── torvaldsen-commits.md        #     Commit conventions (202 lines)
-│   │   └── torvaldsen-scope.md          #     Scope discipline (226 lines)
-│   ├── hooks/
-│   │   └── hooks-config.json            #   Torvaldsen hook definitions
-│   └── templates/                       #   Artifact blueprints
-│       ├── BRAINSTORM.template.md
-│       ├── RESEARCH-FINDINGS.template.md
-│       ├── SPECIFICATION.template.md
-│       ├── ARCHITECTURE.template.md
-│       ├── CONVENTIONS.template.md
-│       ├── PROJECT-STATUS.template.md
-│       ├── PHASE-SUMMARY.template.md
-│       ├── START-HERE.template.md
-│       ├── ADR.template.md
-│       ├── SCOPE-MANIFEST.template.json
-│       ├── CLAUDE-PROJECT.template.md
-│       ├── CONTRIBUTING.template.md
-│       └── project-rules/               #   Stack-specific templates
-│           ├── nextjs-app-router.rule.md
-│           ├── supabase.rule.md
-│           ├── convex.rule.md
-│           ├── python-fastapi.rule.md
-│           └── react-performance.rule.md
-│
+├── global/                              # Source files (reference, not installed)
+├── global-minimal/                      # Minimal global ~/.claude/settings.json
+├── torvaldsen/                          # Torvaldsen source (rules + templates)
 └── archive/                             # Historical/legacy files
 ```
 

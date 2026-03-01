@@ -197,9 +197,11 @@ On Torvaldsen projects, additional scope-guard hooks activate when you're on an 
 
 ## Customization
 
+All customization happens in your project's `.claude/` directory. Changes are project-scoped and version-controlled.
+
 ### Adding a new agent
 
-Create a file in `~/.claude/agents/your-agent.md` with YAML frontmatter:
+Create a file in `.claude/agents/your-agent.md` with YAML frontmatter:
 
 ```yaml
 ---
@@ -221,7 +223,7 @@ Instructions for the agent...
 
 ### Adding a new skill
 
-Create `~/.claude/skills/your-skill/SKILL.md` with YAML frontmatter:
+Create `.claude/skills/your-skill/SKILL.md` with YAML frontmatter:
 
 ```yaml
 ---
@@ -236,7 +238,7 @@ Instructions...
 
 ### Adding a new command
 
-Create `~/.claude/commands/your-command.md`:
+Create `.claude/commands/your-command.md`:
 
 ```yaml
 ---
@@ -255,7 +257,7 @@ Instructions for what happens when user runs /your-command...
 
 ### Modifying rules
 
-Edit files in `~/.claude/rules/`. These are loaded into every conversation, so keep them concise. If a rule is project-specific, put it in the project's `.claude/rules/` directory instead.
+Edit files in `.claude/rules/`. These are loaded into every conversation, so keep them concise. Since rules are project-level, different projects can have different rules — no more one-size-fits-all.
 
 ---
 

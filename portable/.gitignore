@@ -1,0 +1,10 @@
+# Runtime (Claude Code internal)
+plans/
+work/
+debug/
+statsig/
+telemetry/
+*.local.user.json
+
+# OS
+.DS_Store
