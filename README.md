@@ -1,6 +1,6 @@
 # Claude Code Development Framework + Torvaldsen Workflow v2.0
 
-> A complete Claude Code configuration with agent orchestration, 19 commands, 26 skills, 14 agents, 7 auto-loaded rules, token optimization, and the Torvaldsen atomic development methodology for AI-assisted projects. Built natively for **Claude Code**.
+> A complete Claude Code configuration with agent orchestration, 19 commands, 25 skills, 7 agents, 7 auto-loaded rules, token optimization, and the Torvaldsen atomic development methodology for AI-assisted projects. Built natively for **Claude Code**.
 
 ## What's In This Repo
 
@@ -9,13 +9,13 @@ This is a **complete, shareable Claude Code configuration** — everything you n
 | Category | Count | Description |
 |----------|-------|-------------|
 | **Global Rules** | 7 | Always-loaded rules: code quality, testing, security, git, docs |
-| **Agents** | 14 | Implementation specialists (backend, frontend, testing, review, planning, design, cleanup + 6 literary) |
+| **Agents** | 7 | Implementation specialists (backend, testing, review, planning, design: UX + UI, cleanup) |
 | **Forked Skills** | 6 | Run in isolated context like agents: build validation, research, git ops, debugging, patterns, docs |
-| **Background Skills** | 8 | Auto-trigger only (hidden from menu): perf check, Tailwind, imports, etc. |
+| **Background Skills** | 7 | Auto-trigger only (hidden from menu): perf check, Tailwind, imports, etc. |
 | **Standard Skills** | 12 | User-invocable: scope check, onboarding, testing, planning, etc. |
 | **Commands** | 19 | Slash commands: `/brainstorm`, `/issue`, `/review`, `/deploy`, etc. |
 | **Hook Scripts** | 5 | File protection, auto-format, git safety, security guard |
-| **Token Optimization** | 3 | env settings: haiku default for sub-agents, thinking cap, auto-compact |
+| **Token Optimization** | 2 | env settings: thinking cap, auto-compact |
 | **Torvaldsen Workflow** | 8 commands | Atomic development methodology for 200+ issue projects |
 | **Templates** | 17 | Artifact blueprints + 5 stack-specific rule templates |
 
@@ -314,21 +314,14 @@ claude-code-config/
 │   │   ├── workflow-git.md              #     Branches, commits, PRs
 │   │   ├── documentation.md             #     Active/archived docs, JSDoc
 │   │   └── mcp-tool-usage.md            #     MCP path conventions
-│   ├── agents/                          #   14 active sub-agent definitions (Task tool)
+│   ├── agents/                          #   7 active sub-agent definitions (Task tool)
 │   │   ├── backend-agent.md             #     API, database, server logic (skills: backend-dev, validate-build)
-│   │   ├── frontend-agent.md            #     UI components, state, styling (skills: ui-dev, react-perf, tailwind)
 │   │   ├── testing-agent.md             #     Unit/integration/E2E tests (skills: testing-suite, validate-build)
-│   │   ├── planning-agent.md            #     Architecture, task breakdown (model: sonnet)
-│   │   ├── ui-agent.md                  #     Visual design, component specs
-│   │   ├── ux-agent.md                  #     User flows, wireframes
+│   │   ├── planning-agent.md            #     Architecture, task breakdown (model: opus)
+│   │   ├── ui-agent.md                  #     Visual design, component specs + implementation (UX → UI pipeline)
+│   │   ├── ux-agent.md                  #     User flows, wireframes (UX → UI pipeline)
 │   │   ├── cleanup-agent.md             #     Dead code, debug artifacts (model: haiku)
-│   │   ├── code-reviewer-agent.md       #     Read-only code review (hooks: blocks Write/Edit)
-│   │   ├── consistency-orchestrator-agent.md # Manuscript consistency
-│   │   ├── naming-consistency-agent.md  #     Name/term consistency
-│   │   ├── timeline-consistency-agent.md #    Timeline/date consistency
-│   │   ├── detail-consistency-agent.md  #     Object/action detail checks
-│   │   ├── plausibility-agent.md        #     Story logic plausibility
-│   │   └── story-loopholes-agent.md     #     Plot holes, loose threads
+│   │   └── code-reviewer-agent.md       #     Read-only code review (hooks: blocks Write/Edit)
 │   │   # 6 agents archived → replaced by forked skills:
 │   │   # build-validator → validate-build skill (context: fork, model: haiku)
 │   │   # research → research skill (context: fork, model: haiku)
@@ -356,10 +349,9 @@ claude-code-config/
 │   │   ├── start.md                     #     /start — codebase exploration
 │   │   ├── status-sync.md               #     /status-sync — dashboard update
 │   │   └── test.md                      #     /test — run/write tests
-│   ├── skills/                          #   26 auto-triggered skills
+│   ├── skills/                          #   25 auto-triggered skills
 │   │   ├── agent-coordination/          #     Multi-agent coordination
 │   │   ├── backend-development/         #     Firebase, state management
-│   │   ├── consistency-check/           #     Manuscript consistency
 │   │   ├── dependency-audit/            #     npm audit, outdated pkgs
 │   │   ├── documentation/               #     Technical docs
 │   │   ├── fix-review/                  #     Post-fix completeness

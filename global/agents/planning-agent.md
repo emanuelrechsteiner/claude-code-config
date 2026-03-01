@@ -1,7 +1,7 @@
 ---
 name: planning-agent
 description: "Strategic project planning and architecture specialist. Use for: creating project plans, breaking down features into tasks, designing system architecture, dependency mapping, risk assessment."
-model: sonnet
+model: opus
 tools:
   - Glob
   - Grep

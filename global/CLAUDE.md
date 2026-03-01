@@ -4,7 +4,7 @@
 
 ## System Architecture
 
-This environment includes 7 auto-loaded rules (`~/.claude/rules/`), 19 commands, 26 skills (6 forked, 8 background), 14 agents, and 5 hooks. Token optimization is active via `env` settings.
+This environment includes 7 auto-loaded rules (`~/.claude/rules/`), 19 commands, 25 skills (6 forked, 7 background), 7 agents, and 5 hooks. Token optimization is active via `env` settings.
 
 ### Auto-Loaded Rules (always in context)
 
@@ -22,14 +22,13 @@ This environment includes 7 auto-loaded rules (`~/.claude/rules/`), 19 commands,
 
 | Agent | Model | Use For |
 |-------|-------|---------|
-| planning-agent | sonnet | Architecture, task breakdown, implementation plans |
+| planning-agent | opus | Architecture, task breakdown, implementation plans |
 | backend-agent | sonnet | APIs, database, server logic, authentication |
-| frontend-agent | sonnet | UI components, state management, styling |
 | testing-agent | sonnet | Unit tests, integration tests, E2E tests |
 | code-reviewer-agent | sonnet | Code review (READ-ONLY — cannot edit files) |
 | cleanup-agent | haiku | Dead code detection, debug artifact removal |
 | ux-agent | sonnet | User flows, wireframes, accessibility |
-| ui-agent | sonnet | Visual design systems, component specs |
+| ui-agent | sonnet | Visual design systems, component specs, component implementation |
 
 ### Forked Skills (replace former agents — run in isolated context)
 
@@ -74,14 +73,14 @@ Torvaldsen rules (commits, scope, workflow) are installed per-project by `/brain
 
 ### Background Skills (auto-trigger only, hidden from menu)
 
-react-perf-check, tailwindcss-v4-styling, import-fixer, fix-review, agent-coordination, orchestration, validation, consistency-check
+react-perf-check, tailwindcss-v4-styling, import-fixer, fix-review, agent-coordination, orchestration, validation
 
 ### Token Optimization
 
-- Sub-agents default to haiku (`CLAUDE_CODE_SUBAGENT_MODEL`)
-- Extended thinking capped at 10K tokens (`MAX_THINKING_TOKENS`)
-- Auto-compact at 50% context usage (`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`)
-- Override per-agent/skill with explicit `model:` field
+Context window efficiency — keep agent outputs small so they don't fill up the main context:
+
+- Extended thinking capped at 10K tokens (`MAX_THINKING_TOKENS`) — prevents runaway reasoning
+- Auto-compact at 50% context usage (`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`) — aggressive context hygiene
 
 ### Behavioral Directives
 
