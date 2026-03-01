@@ -9,6 +9,7 @@ This is a **complete, shareable Claude Code configuration** — everything you n
 | Category | Count | Description |
 |----------|-------|-------------|
 | **Global Rules** | 7 | Always-loaded rules: code quality, testing, security, git, docs |
+| **Agents** | 20 | Sub-agent definitions for Task tool orchestration |
 | **Commands** | 19 | Slash commands: `/brainstorm`, `/issue`, `/review`, `/deploy`, etc. |
 | **Skills** | 26 | Auto-triggered: build validation, scope checking, debugging, etc. |
 | **Hook Scripts** | 5 | File protection, auto-format, git safety, security guard |
@@ -310,6 +311,27 @@ claude-code-config/
 │   │   ├── workflow-git.md              #     Branches, commits, PRs
 │   │   ├── documentation.md             #     Active/archived docs, JSDoc
 │   │   └── mcp-tool-usage.md            #     MCP path conventions
+│   ├── agents/                          #   20 sub-agent definitions (Task tool)
+│   │   ├── backend-agent.md             #     API, database, server logic
+│   │   ├── frontend-agent.md            #     UI components, state, styling
+│   │   ├── testing-agent.md             #     Unit/integration/E2E tests
+│   │   ├── documentation-agent.md       #     API docs, README, guides
+│   │   ├── planning-agent.md            #     Architecture, task breakdown
+│   │   ├── research-agent.md            #     Tech research (uses haiku)
+│   │   ├── ui-agent.md                  #     Visual design, component specs
+│   │   ├── ux-agent.md                  #     User flows, wireframes
+│   │   ├── version-control-agent.md     #     Git operations, PRs
+│   │   ├── build-validator-agent.md     #     TypeScript/ESLint checks
+│   │   ├── cleanup-agent.md             #     Dead code, debug artifacts
+│   │   ├── code-reviewer-agent.md       #     Read-only code review
+│   │   ├── framework-specialist-agent.md #    Next.js/SSR debugging
+│   │   ├── pattern-extractor-agent.md   #     Learning from bug fixes
+│   │   ├── consistency-orchestrator-agent.md # Manuscript consistency
+│   │   ├── naming-consistency-agent.md  #     Name/term consistency
+│   │   ├── timeline-consistency-agent.md #    Timeline/date consistency
+│   │   ├── detail-consistency-agent.md  #     Object/action detail checks
+│   │   ├── plausibility-agent.md        #     Story logic plausibility
+│   │   └── story-loopholes-agent.md     #     Plot holes, loose threads
 │   ├── commands/                        #   19 slash commands
 │   │   ├── bootstrap.md                 #     /bootstrap — repo setup
 │   │   ├── brainstorm.md                #     /brainstorm — idea → foundation

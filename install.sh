@@ -128,6 +128,13 @@ if [ "$INSTALL_GLOBAL" = true ]; then
     safe_copy "$f" "$CLAUDE_DIR/rules/$(basename "$f")"
   done
 
+  # Agents
+  info "Agents (20 sub-agent definitions)"
+  mkdir -p "$CLAUDE_DIR/agents"
+  for f in "$SCRIPT_DIR/global/agents/"*.md; do
+    safe_copy "$f" "$CLAUDE_DIR/agents/$(basename "$f")"
+  done
+
   # Commands
   info "Commands (19 slash commands)"
   mkdir -p "$CLAUDE_DIR/commands"
@@ -218,6 +225,7 @@ if [ "$INSTALL_GLOBAL" = true ]; then
   echo "  Global Config:"
   echo "    CLAUDE.md          → ~/.claude/CLAUDE.md"
   echo "    7 rules            → ~/.claude/rules/"
+  echo "    20 agents          → ~/.claude/agents/"
   echo "    19 commands        → ~/.claude/commands/"
   echo "    26 skills          → ~/.claude/skills/"
   echo "    5 hook scripts     → ~/.claude/hooks/"
